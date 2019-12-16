@@ -8,8 +8,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainServletController extends HttpServlet {
+    static Map<String, Command> commandMapping = new HashMap<>();
+
+    public MainServletController(){
+        commandMapping.put("A", ((request, response) -> {
+            System.out.println(request.getServerPort() + request.getContextPath());
+            return "index.html";
+        }));
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,13 +35,8 @@ public class MainServletController extends HttpServlet {
         String commandParamValue = req.getParameter("command");
 
         Command command;
-        if ("A".equals(commandParamValue)) {
-            command = new Command() {
-                public String execute(HttpServletRequest request, HttpServletResponse response) {
-                    System.out.println(req.getContextPath());
-                    return "index.html";
-                }
-            };
+        if (commandMapping.containsKey(commandParamValue)) {
+            command = commandMapping.get(commandParamValue);
         } else {
             command = new Command() {
                 @Override
