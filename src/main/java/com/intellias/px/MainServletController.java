@@ -1,6 +1,7 @@
 package com.intellias.px;
 
 import com.intellias.px.commands.Command;
+import com.intellias.px.commands.LoginCommand;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,10 +13,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainServletController extends HttpServlet {
-    static Map<String, Command> commandMapping = new HashMap<>();
+
+    private static final Map<String, Command> commandIdToCommand = new HashMap<>();
+
+    static {
+        commandIdToCommand.put("login", new LoginCommand());
+    }
 
     public MainServletController(){
-        commandMapping.put("A", ((request, response) -> {
+        commandIdToCommand.put("A", ((request, response) -> {
             System.out.println(request.getServerPort() + request.getContextPath());
             return "index.html";
         }));
@@ -33,23 +39,8 @@ public class MainServletController extends HttpServlet {
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String commandParamValue = req.getParameter("command");
-
-        Command command;
-        if (commandMapping.containsKey(commandParamValue)) {
-            command = commandMapping.get(commandParamValue);
-        } else {
-            command = new Command() {
-                @Override
-                public String execute(HttpServletRequest request, HttpServletResponse response) {
-                    System.out.println("Error");
-                    return "oups.html";
-                }
-            };
-        }
-
+        Command command = commandIdToCommand.getOrDefault(commandParamValue, (lReq, lRes) -> "oups.html");
         String viewName = command.execute(req, resp);
-
-        System.out.println(req.getContextPath());
         RequestDispatcher a = req.getRequestDispatcher(viewName);
         a.forward(req, resp);
     }

@@ -12,11 +12,6 @@
 
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
-        <url-pattern>/dosomething</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>MainController</servlet-name>
-        <url-pattern>/dosomething2</url-pattern>
+        <url-pattern>/controller</url-pattern>
     </servlet-mapping>
 </web-app>
