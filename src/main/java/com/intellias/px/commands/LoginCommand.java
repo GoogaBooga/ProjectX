@@ -16,7 +16,7 @@ public class LoginCommand implements Command{
             request.setAttribute("user", login);
             return "WEB-INF/main.jsp";
         } else {
-            return "oups.html";
+            return "WEB-INF/login.jsp";
         }
     }
 }

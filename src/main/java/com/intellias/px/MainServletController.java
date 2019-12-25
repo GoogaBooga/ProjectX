@@ -23,7 +23,7 @@ public class MainServletController extends HttpServlet {
     public MainServletController(){
         commandIdToCommand.put("A", ((request, response) -> {
             System.out.println(request.getServerPort() + request.getContextPath());
-            return "index.html";
+            return "index.jsp";
         }));
     }
 
