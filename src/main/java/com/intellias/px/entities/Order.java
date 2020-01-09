@@ -12,6 +12,4 @@ public class Order {
     private Date date;
     private String comment;
     private Status status;
-
-
 }

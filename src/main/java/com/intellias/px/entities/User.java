@@ -1,11 +1,15 @@
 package com.intellias.px.entities;
 
+import lombok.Builder;
+
 import java.util.Objects;
 
+@Builder
 public class User {
 
     private int id;
     private String name;
+    private String login;
     private String password;
 
     public int getId() {

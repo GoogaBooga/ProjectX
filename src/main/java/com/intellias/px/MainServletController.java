@@ -2,6 +2,7 @@ package com.intellias.px;
 
 import com.intellias.px.commands.Command;
 import com.intellias.px.commands.LoginCommand;
+import com.intellias.px.dao.factories.H2DaoFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +18,7 @@ public class MainServletController extends HttpServlet {
     private static final Map<String, Command> commandIdToCommand = new HashMap<>();
 
     static {
-        commandIdToCommand.put("login", new LoginCommand());
+        commandIdToCommand.put("login", new LoginCommand(new H2DaoFactory()));
     }
 
     public MainServletController(){

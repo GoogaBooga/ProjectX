@@ -4,12 +4,10 @@ import com.intellias.px.PXConnectionPool;
 import com.intellias.px.entities.Order;
 import com.intellias.px.entities.Status;
 
-import javax.sql.rowset.JdbcRowSet;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Dictionary;
 
 public class JdbcProgram {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
